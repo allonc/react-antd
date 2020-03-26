@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { adminRoutes } from "./routes";
+import Frame from "./components/Frame/index";
+import "./App.scss"
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Frame>
+      <Switch>
+        {adminRoutes.map(route => {
+          return (
+            <Route
+              path={route.path}
+              key={route.path}
+              exact={route.exact}
+              render={routeProps => {
+                return <route.component {...routeProps} />;
+              }}
+            />
+          );
+        })}
+        <Redirect to="/404"/>
+      </Switch>
+    </Frame>
   );
 }
 
