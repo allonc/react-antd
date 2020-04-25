@@ -1,24 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { Provider } from "react-redux";
+
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import 'antd/dist/antd.css';
-import App from "./App"
-import { mainRoutes } from './routes'
-
-
+import "antd/dist/antd.css";
+import App from "./App";
+import { mainRoutes } from "./routes";
+import store from "./store";
 ReactDOM.render(
-  <Router>
-    <Switch>
-      <Route path="/admin" render={routeProps => <App {...routeProps} />}/>
-      {mainRoutes.map(route => {
-        return <Route key={route.path} {...route} />
-      })}
-      <Redirect to="/admin" from="/"  />
-      <Redirect to="/404" />
-    </Switch>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/admin" render={(routeProps) => <App {...routeProps} />} />
+        {mainRoutes.map((route) => {
+          return <Route key={route.path} {...route} />;
+        })}
+        <Redirect to="/admin" from="/" />
+        <Redirect to="/404" />
+      </Switch>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 

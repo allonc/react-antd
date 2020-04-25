@@ -1,14 +1,17 @@
-import { get,post,put,del } from "../utils/request";
+import { get,post,put } from "../utils/request";
 
-export function listApi(page=1) {
-    return get("",page)
+export function listApi(params) {
+    return get("/FreightTemplatesList",params)
 }
-export function createApi(data) {
-    return post("",data)
+export function createApi(params) {
+    return post("/UpdateUser",params)
+}
+export function getDetail(id) {
+    return get("/ProductsDetail",id)
 }
 export function modifyOne(id,data) {
     return put("",data)
 }
 export function delOne(id) {
-    return del("")
+    return post("/DelFreightTemplate",id)
 }
